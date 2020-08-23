@@ -1,14 +1,36 @@
-import React from 'react';
+import React from "react";
 
-function App() {
-  return (
-    <div >
-    <h1> Yatch Online </h1>
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      dices: [0, 0, 0, 0, 0],
+    };
+  }
 
-    <button onClick = {()=>alert("야추!")}> Roll </button>
+  roll = () => {
+    let newDices = this.state.dices
+    for (let i = 0 ; i < this.state.dices.length; i++){
+        newDices[i] = Math.floor(Math.random() * 6) + 1
+    }
+    this.setState({dices : newDices})
+  }
 
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h1> Yatch Online </h1>
+        {this.state.dices.map((dice) => (<div>
+<input type = 'checkbox'/>
+          <h3 style={{ textAlign: "center" }}> {dice} </h3>
+          </div>
+        ))}
+        <button onClick={() => this.roll()}>
+          Roll
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
